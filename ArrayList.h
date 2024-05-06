@@ -118,7 +118,7 @@ public:
     }
 
 
-    T getElement(int index) {                           //method returns element by index
+    T& getElement(int index) {                           //method returns element by index
         return tab[index];
     };
 
