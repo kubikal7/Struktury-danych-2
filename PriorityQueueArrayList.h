@@ -11,7 +11,7 @@ class PriorityQueueArrayList : public PriorityQueue<T>
 {
 	ArrayList<PQAL_element<T>> list;
 public:
-	void insert(T element, int priority) {
+	void insert(T element, int priority) {										//adds element to heap and find proper index for it
 		int i = 0;
 		int size = list.getSize();
 		while (list.getElement(i).getPriority() >= priority && i < size) {
@@ -21,30 +21,28 @@ public:
 		list.addElement(el, i);
 	}
 
-	T extract_max() {
+	T extract_max() {															//returns max (top) element - first element in array
 		return list.pop_front().getElement();
 	}
 
-	T find_max() {
+	T find_max() {																//only returns max (top) element without remove it
 		return list.getElement(0).getElement();
 	}
 
-	void modify_key(T element, int priority) {
+	void modify_key(T element, int priority) {									//edits priority of element in array
 		int size = list.getSize();
 		int i = 0;
-		while (i < size && list.getElement(i).getElement() != element) {
+		while (i < size && list.getElement(i).getElement() != element) {		//looking for index of element
 			i++;
 		}
 		if (i == size) {
 			cout << "Element not found";
 			return;
 		}
-		T el = list.getElement(i).getElement();
-		list.deleteElement(i);
-		insert(el, priority);
+		list.getElement(i).setPriority(priority);
 	}
 
-	void decrease_key(T element){
+	void decrease_key(T element){												//the same like modify_key but only change -1
 		int size = list.getSize();
 		int i = 0;
 		while (i < size && list.getElement(i).getElement() != element) {
@@ -60,7 +58,7 @@ public:
 		insert(el, --prio);
 	}
 
-	void increase_key(T element){
+	void increase_key(T element){												//the same like modify_key but only change +1
 		int size = list.getSize();
 		int i = 0;
 		while (i < size && list.getElement(i).getElement() != element) {
